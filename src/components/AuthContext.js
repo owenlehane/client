@@ -1,16 +1,27 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create a context for the authentication state
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-// Provider component that wraps your app and makes an auth object available to any child component that calls useAuth().
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
+  useEffect(() => {
+    // Check local storage for authentication status on initial load
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
+  }, []);
+
+  const login = () => {
+    localStorage.setItem('isAuthenticated', 'true');  // Store authentication status
+    setIsAuthenticated(true);  // Update state
+  };
+
+  const logout = () => {
+    localStorage.removeItem('isAuthenticated');  // Clear the stored authentication status
+    setIsAuthenticated(false);  // Update state to not authenticated
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
@@ -18,3 +29,6 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;
+
