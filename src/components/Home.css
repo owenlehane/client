@@ -1,0 +1,97 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin: 0;
+  }
+  
+  div {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-btn, .save-btn {
+    background-color: #5cb85c;
+  }
+  
+  .add-btn:hover, .save-btn:hover {
+    background-color: #4cae4c;
+  }
+  
+  .edit-btn {
+    background-color: #f0ad4e;
+  }
+  
+  .edit-btn:hover {
+    background-color: #ec971f;
+  }
+  
+  .delete-btn {
+    background-color: #d9534f;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c9302c;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  li span {
+    flex-grow: 1;
+  }
+  
+  .logout-btn {
+    background-color: #24292e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    position: fixed; 
+    top: 10px; 
+    right: 10px;
+    z-index: 1000; 
+  }

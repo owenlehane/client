@@ -20,7 +20,8 @@ const GitHubLogin = () => {
     return (
         
         <div className="container">
-      <h2>Welcome to Our App</h2>
+      <h2>Welcome to My To-Do React App</h2>
+      <h3>Please Login</h3>
       <button onClick={handleLogin} className="button">
         <i className="fab fa-github"></i> Log in with GitHub
       </button>
@@ -28,8 +29,6 @@ const GitHubLogin = () => {
   <div class="footer-content">
     <p>Created by:</p>
     <p>Owen Lehane</p>
-    <p>Stephen Manning</p>
-    <p>© 2024 Chess Makers. All rights reserved.</p>
     <div class="social-links">
       <a href="https://www.facebook.com/company" target="_blank">Facebook</a>
       | <a href="https://www.twitter.com/company" target="_blank">Twitter</a>

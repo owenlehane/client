@@ -1,34 +1,82 @@
-import React from 'react';
-import { useAuth } from './AuthContext';
+import React, { useState } from 'react';
+import './Home.css'; 
 
-const Home = () => {
-  const { logout } = useAuth();
+function Home() {
+  const [todos, setTodos] = useState([]);
+  const [text, setText] = useState('');
+  const [edit, setEdit] = useState({ id: null, text: '' });
 
-  const handleLogout = () => {
-    fetch('http://localhost:3001/auth/logout')
-      .then(() => {
-        logout();
-        window.location.href = '/';
-      })
-      .catch(err => console.error('Logout failed', err));
+  const addTodo = text => {
+    const newTodo = { id: Date.now(), text: text, isCompleted: false };
+    setTodos([...todos, newTodo]);
   };
 
-  const handleMatchmaking = () => {
-    // You might want to add functionality here for what happens when the matchmaking button is clicked
-    console.log('Matchmaking button clicked');
+  const deleteTodo = id => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const editTodo = (id, newText) => {
+    setTodos(todos.map(todo => {
+      return todo.id === id ? { ...todo, text: newText } : todo;
+    }));
+  };
+
+  const handleEditChange = e => {
+    setEdit({ ...edit, text: e.target.value });
+  };
+
+  const handleSave = id => {
+    editTodo(id, edit.text);
+    setEdit({ id: null, text: '' });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    addTodo(text);
+    setText('');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    // Redirect to login page or another appropriate action
+    window.location.href = '/login'; 
   };
 
   return (
-    <div className="container">
+    <div>
       <div className="header">
-        <button onClick={handleLogout} className="logout-button">Logout</button>
+      <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </div>
-      <h1>Welcome Home</h1>
-      <p>You are logged in with GitHub.</p>
-      <button onClick={handleMatchmaking} className="button matchmaking-button">Find a Match</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Add new todo"
+        />
+        <button type="submit" className="add-btn">Add</button>
+      </form>
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            {edit.id === todo.id ? (
+              <input type="text" value={edit.text} onChange={handleEditChange} />
+            ) : (
+              <span>{todo.text}</span>
+            )}
+            {edit.id === todo.id ? (
+              <button onClick={() => handleSave(todo.id)} className="save-btn">Save</button>
+            ) : (
+              <button onClick={() => setEdit({ id: todo.id, text: todo.text })} className="edit-btn">Edit</button>
+            )}
+            <button onClick={() => deleteTodo(todo.id)} className="delete-btn">Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default Home;
+
 
