@@ -1,6 +1,6 @@
 import React from 'react';
-import GitHubLogin from '/Users/owenlehane/my-app/client/src/components/GitHubLogin' 
-import Home from '/Users/owenlehane/my-app/client/src/components/Home'
+import GitHubLogin from '/Users/owenlehane/Development/a4-components/client/src/components/GitHubLogin.js' 
+import Home from '/Users/owenlehane/Development/a4-components/client/src/components/Home.js'
 import { AuthProvider, useAuth } from './AuthContext';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
